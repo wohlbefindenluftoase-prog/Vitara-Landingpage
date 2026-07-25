@@ -3,389 +3,384 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Vitara — Dein wöchentlicher Gesundheits-Check-in</title>
-<meta name="description" content="Vitara ist ein ruhiger, wöchentlicher Gesundheits-Check-in: fünf Dimensionen, ein Pulse Score, echte Evidenz statt Hype." />
+<title>Vitara — Gesundheit sichtbar machen</title>
+<meta name="description" content="Vitara zeigt dir, wie sich Schlaf, Energie, Regeneration und langfristige Gesundheit entwickeln — in einem einzigen Score." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style> 
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
   :root{
-    --paper:#F5F3EE;
-    --paper-dim:#EDEAE1;
-    --ink:#1D2621;
-    --pine:#3F6656;
-    --pine-dim:#2E4B3F;
-    --pulse:#8C2F3F;
-    --mist:#C9CFC7;
-    --mist-line: rgba(29,38,33,0.12);
-    --max-w: 1120px;
+    --bg-mint:#EAF6EF;
+    --bg-mint-2:#F7FBF8;
+    --white:#FFFFFF;
+    --ink:#13221A;
+    --ink-soft:#3C4A41;
+    --muted:#5B6B62;
+    --green:#3E8F68;
+    --green-dark:#16281F;
+    --green-pale:#DCEEE3;
+    --line: rgba(19,34,26,0.10);
+    --max-w: 1180px;
   }
-
   *,*::before,*::after{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
   body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
+    margin:0; color:var(--ink);
     font-family:"IBM Plex Sans", sans-serif;
-    font-size:16px;
     line-height:1.55;
-    -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, var(--bg-mint) 0%, transparent 60%),
+      var(--bg-mint-2);
   }
-  h1,h2,h3{
-    font-family:"Fraunces", serif;
-    font-weight:500;
-    letter-spacing:-0.01em;
-    margin:0;
-  }
-  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
-  a{ color:inherit; }
-  img,svg{ display:block; max-width:100%; }
+  h1,h2,h3{ font-family:"Fraunces", serif; font-weight:500; margin:0; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.04em; }
+  a{ color:inherit; text-decoration:none; }
   .wrap{ max-width:var(--max-w); margin:0 auto; padding:0 28px; }
-
-  :focus-visible{
-    outline:2px solid var(--pine);
-    outline-offset:3px;
-  }
+  :focus-visible{ outline:2px solid var(--green); outline-offset:3px; }
 
   /* ---------- Nav ---------- */
-  .nav{
-    position:sticky; top:0; z-index:20;
-    background:rgba(245,243,238,0.86);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--mist-line);
+  .nav{ position:sticky; top:0; z-index:30; backdrop-filter:blur(10px); background:rgba(247,251,248,0.75); border-bottom:1px solid var(--line); }
+  .nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:76px; gap:24px; }
+  .logo{ display:flex; align-items:center; gap:10px; font-family:"Fraunces", serif; font-size:20px; font-weight:600; flex:0 0 auto; }
+  .logo .mark{
+    width:34px; height:34px; border-radius:50%;
+    background:linear-gradient(135deg, var(--green), var(--green-dark));
+    display:flex; align-items:center; justify-content:center;
   }
-  .nav .wrap{
-    display:flex; align-items:center; justify-content:space-between;
-    height:72px;
-  }
-  .logo{
-    font-family:"Fraunces", serif;
-    font-size:22px; font-weight:600;
-    display:flex; align-items:center; gap:8px;
-  }
-  .logo .dot{
-    width:9px; height:9px; border-radius:50%;
-    background:var(--pulse);
-    animation: breathe 3.6s ease-in-out infinite;
-  }
-  .nav-cta{
-    font-family:"IBM Plex Sans", sans-serif;
-    font-size:14px; font-weight:500;
-    background:var(--ink); color:var(--paper);
-    padding:10px 18px; border-radius:999px;
-    text-decoration:none;
-    transition:transform .15s ease, background .15s ease;
-  }
-  .nav-cta:hover{ background:var(--pine-dim); transform:translateY(-1px); }
-
-  @keyframes breathe{
-    0%,100%{ opacity:1; transform:scale(1); }
-    50%{ opacity:.45; transform:scale(0.78); }
-  }
-
-  /* ---------- Hero ---------- */
-  .hero{ padding:76px 0 40px; }
-  .hero .eyebrow{
-    font-family:"IBM Plex Mono", monospace;
-    font-size:13px; color:var(--pine-dim);
-    letter-spacing:0.06em; text-transform:uppercase;
-    margin-bottom:18px;
-  }
-  .hero h1{
-    font-size:clamp(38px, 6vw, 68px);
-    line-height:1.04;
-    max-width:14ch;
-  }
-  .hero h1 em{
-    font-style:normal;
-    color:var(--pine);
-  }
-  .hero p.lede{
-    margin-top:22px;
-    font-size:19px;
-    max-width:46ch;
-    color:#3a423d;
-  }
-  .hero .cta-row{
-    margin-top:32px;
-    display:flex; align-items:center; gap:18px; flex-wrap:wrap;
-  }
-  .btn-primary{
-    background:var(--pulse); color:var(--paper);
-    font-weight:500; font-size:15px;
-    padding:14px 26px; border-radius:999px;
-    text-decoration:none; border:none; cursor:pointer;
+  .logo .mark svg{ width:18px; height:18px; }
+  .nav-links{ display:flex; gap:30px; font-size:14.5px; color:var(--ink-soft); flex:1; justify-content:center; }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-right{ display:flex; align-items:center; gap:20px; flex:0 0 auto; }
+  .nav-right .signin{ font-size:14.5px; color:var(--ink-soft); font-weight:500; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:"IBM Plex Sans", sans-serif; font-weight:500; font-size:14.5px;
+    padding:12px 20px; border-radius:999px; cursor:pointer; border:none;
     transition:transform .15s ease, box-shadow .15s ease;
   }
-  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 24px -12px rgba(140,47,63,0.55); }
-  .hero .note{ font-size:14px; color:#6b756f; }
+  .btn-primary{ background:var(--green-dark); color:var(--white); }
+  .btn-primary:hover{ transform:translateY(-1px); box-shadow:0 10px 22px -12px rgba(22,40,31,0.5); }
+  .btn-ghost{ background:var(--white); color:var(--ink); border:1px solid var(--line); }
+  .btn-ghost:hover{ transform:translateY(-1px); }
+  @media (max-width: 900px){ .nav-links{ display:none; } }
 
-  /* Pulse line signature element */
-  .pulse-stage{
-    margin-top:56px;
-    border-top:1px solid var(--mist-line);
-    border-bottom:1px solid var(--mist-line);
-    padding:28px 0;
-    overflow:hidden;
+  /* ---------- Hero ---------- */
+  .hero{ padding:76px 0 100px; }
+  .hero .grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:60px; align-items:center; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.06em;
+    color:var(--green); background:var(--white); border:1px solid var(--line);
+    padding:7px 14px; border-radius:999px; margin-bottom:24px;
   }
-  .pulse-stage svg{ width:100%; height:auto; }
-  .pulse-path{
-    fill:none;
-    stroke:var(--pine);
-    stroke-width:2;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    stroke-dasharray:1400;
-    stroke-dashoffset:1400;
-    animation: draw 2.6s cubic-bezier(.4,0,.2,1) forwards;
-  }
-  .pulse-dot{
-    fill:var(--pulse);
-    opacity:0;
-    animation: appear .4s ease forwards 2.3s;
-  }
-  @keyframes draw{ to{ stroke-dashoffset:0; } }
-  @keyframes appear{ to{ opacity:1; } }
+  .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--green); }
+  .hero h1{ font-size:clamp(40px, 5.2vw, 64px); line-height:1.05; }
+  .hero h1 .accent{ color:var(--green); }
+  .hero p.lede{ margin-top:22px; font-size:18px; color:var(--ink-soft); max-width:46ch; }
+  .cta-row{ margin-top:32px; display:flex; gap:14px; flex-wrap:wrap; }
+  .btn-primary.lg, .btn-ghost.lg{ padding:15px 26px; font-size:15px; }
 
-  @media (prefers-reduced-motion: reduce){
-    .pulse-path{ animation:none; stroke-dashoffset:0; }
-    .pulse-dot{ animation:none; opacity:1; }
-    .logo .dot{ animation:none; }
+  .stats-row{ display:flex; gap:32px; margin-top:44px; flex-wrap:wrap; }
+  .stat .num{ font-family:"Fraunces", serif; font-size:26px; font-weight:600; }
+  .stat .label{ font-size:12.5px; color:var(--muted); margin-top:2px; }
+
+  /* ---------- Dashboard preview card ---------- */
+  .preview-card{
+    background:var(--white); border-radius:26px; border:1px solid var(--line);
+    padding:30px; box-shadow:0 30px 60px -30px rgba(19,34,26,0.25);
+  }
+  .preview-head{ display:flex; justify-content:space-between; align-items:flex-start; }
+  .preview-head .eyebrow-sm{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.06em; color:var(--muted); }
+  .preview-head h3{ font-size:20px; margin-top:4px; }
+  .badge-up{
+    display:flex; align-items:center; gap:4px; background:var(--green-pale); color:var(--green-dark);
+    font-size:12.5px; font-weight:600; padding:6px 10px; border-radius:999px;
   }
 
-  /* ---------- Intro ---------- */
-  .intro{ padding:72px 0; }
-  .intro .wrap{
-    display:grid; grid-template-columns:1fr 1fr; gap:64px;
-  }
-  .intro h2{ font-size:clamp(26px,3.6vw,34px); max-width:12ch; }
-  .intro .body p{ font-size:17px; max-width:52ch; color:#333b36; }
-  .intro .body p + p{ margin-top:14px; }
+  .gauge-wrap{ display:flex; flex-direction:column; align-items:center; margin:20px 0 8px; }
+  .gauge-wrap .score-label{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.08em; color:var(--muted); margin-top:14px; }
+  .gauge-wrap .score-num{ font-family:"Fraunces", serif; font-size:52px; font-weight:600; margin-top:2px; }
+  .gauge-wrap .score-delta{ font-size:13px; color:var(--green); margin-top:4px; }
 
-  /* ---------- Dimensions ---------- */
-  .dimensions{
-    padding:64px 0 88px;
-    border-top:1px solid var(--mist-line);
-  }
-  .dimensions .head{
-    display:flex; justify-content:space-between; align-items:flex-end;
-    gap:24px; margin-bottom:40px; flex-wrap:wrap;
-  }
-  .dimensions .head h2{ font-size:clamp(24px,3vw,30px); }
-  .dimensions .head p{ color:#586059; max-width:38ch; font-size:15px; }
+  .metric-row{ margin-top:18px; }
+  .metric-row .top{ display:flex; justify-content:space-between; font-size:14.5px; margin-bottom:7px; }
+  .metric-row .top .val{ font-weight:600; }
+  .metric-row .top .delta{ color:var(--green); font-size:12.5px; margin-left:4px; }
+  .bar-track{ height:8px; background:var(--green-pale); border-radius:999px; overflow:hidden; }
+  .bar-fill{ height:100%; border-radius:999px; background:linear-gradient(90deg, var(--green-dark), var(--green)); }
 
-  .dim-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    border-top:1px solid var(--mist-line);
-  }
-  .dim{
-    padding:26px 20px 0;
-    border-right:1px solid var(--mist-line);
-  }
+  /* ---------- Generic section ---------- */
+  section{ padding:90px 0; }
+  .section-head{ max-width:640px; margin-bottom:48px; }
+  .section-head .eyebrow{ margin-bottom:16px; }
+  .section-head h2{ font-size:clamp(28px,3.4vw,38px); }
+  .section-head p{ color:var(--ink-soft); margin-top:14px; font-size:16px; }
+
+  /* Warum Vitara — trust */
+  #warum{ background:var(--white); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .trust-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .trust-card{ background:var(--bg-mint-2); border:1px solid var(--line); border-radius:18px; padding:26px; }
+  .trust-card .mono{ font-size:12.5px; color:var(--green); }
+  .trust-card h3{ font-size:18px; margin-top:12px; }
+  .trust-card p{ font-size:14.5px; color:var(--ink-soft); margin-top:8px; }
+  @media (max-width: 900px){ .trust-grid{ grid-template-columns:1fr; } }
+
+  /* Der Pulse — 5 dimensions */
+  .dim-grid{ display:grid; grid-template-columns:repeat(5,1fr); border-top:1px solid var(--line); }
+  .dim{ padding:24px 18px 0; border-right:1px solid var(--line); }
   .dim:last-child{ border-right:none; }
-  .dim .letter{
-    font-family:"IBM Plex Mono", monospace;
-    font-size:13px; color:var(--pulse);
-  }
-  .dim h3{
-    font-size:19px; font-weight:500; margin-top:14px;
-  }
-  .dim p{
-    font-size:14px; color:#586059; margin-top:8px;
-  }
+  .dim .mono{ font-size:12.5px; color:var(--green); }
+  .dim h3{ font-size:18px; margin-top:12px; }
+  .dim p{ font-size:13.5px; color:var(--ink-soft); margin-top:8px; }
+  @media (max-width: 900px){ .dim-grid{ grid-template-columns:1fr 1fr; } .dim{ border-right:none; border-bottom:1px solid var(--line); padding-bottom:20px; } }
+  @media (max-width: 560px){ .dim-grid{ grid-template-columns:1fr; } }
 
-  @media (max-width: 900px){
-    .intro .wrap{ grid-template-columns:1fr; gap:28px; }
-    .dim-grid{ grid-template-columns:1fr 1fr; }
-    .dim{ border-right:none; border-bottom:1px solid var(--mist-line); padding-bottom:22px; }
-  }
-  @media (max-width: 560px){
-    .dim-grid{ grid-template-columns:1fr; }
-  }
+  /* Fortschritt */
+  #fortschritt{ background:var(--white); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .progress-explain{ display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; }
+  .progress-explain .mini-card{ background:var(--bg-mint-2); border:1px solid var(--line); border-radius:20px; padding:26px; }
+  @media (max-width: 900px){ .progress-explain{ grid-template-columns:1fr; } }
 
-  /* ---------- Trust ---------- */
-  .trust{
-    background:var(--ink); color:var(--paper);
-    padding:64px 0;
-  }
-  .trust .wrap{
-    display:grid; grid-template-columns:1.1fr 1fr; gap:56px; align-items:center;
-  }
-  .trust h2{ color:var(--paper); font-size:clamp(24px,3vw,30px); max-width:14ch; }
-  .trust ul{ list-style:none; margin:22px 0 0; padding:0; }
-  .trust li{
-    padding:14px 0; border-top:1px solid rgba(245,243,238,0.14);
-    font-size:15px; color:#D7DBD3;
-    display:flex; gap:12px;
-  }
-  .trust li:last-child{ border-bottom:1px solid rgba(245,243,238,0.14); }
-  .trust li .mark{ color:var(--pulse); font-family:"IBM Plex Mono", monospace; }
-  @media (max-width: 900px){ .trust .wrap{ grid-template-columns:1fr; } }
+  /* Mitgliedschaft */
+  .plans{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .plan{ background:var(--white); border:1px solid var(--line); border-radius:20px; padding:30px; }
+  .plan.premium{ border-color:var(--green-dark); background:var(--ink); color:var(--bg-mint-2); }
+  .plan .price{ font-family:"Fraunces", serif; font-size:32px; margin-top:6px; }
+  .plan ul{ list-style:none; padding:0; margin:20px 0 0; display:flex; flex-direction:column; gap:10px; font-size:14.5px; }
+  .plan.premium ul{ color:#D7E4DC; }
+  .plan li:before{ content:"✓ "; color:var(--green); font-weight:600; }
+  .plan.premium li:before{ color:#7FD1A6; }
+  @media (max-width: 900px){ .plans{ grid-template-columns:1fr; } }
 
-  /* ---------- Waitlist ---------- */
-  .waitlist{ padding:88px 0; }
-  .waitlist .card{
-    background:var(--paper-dim);
-    border:1px solid var(--mist-line);
-    border-radius:20px;
-    padding:48px;
-    display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;
-  }
-  .waitlist h2{ font-size:clamp(24px,3.2vw,32px); max-width:11ch; }
-  .waitlist p{ color:#4a5148; margin-top:12px; font-size:15px; max-width:42ch; }
+  /* FAQ */
+  .faq-item{ border-top:1px solid var(--line); padding:22px 0; }
+  .faq-item:last-child{ border-bottom:1px solid var(--line); }
+  .faq-item h3{ font-size:16.5px; font-weight:500; }
+  .faq-item p{ font-size:14.5px; color:var(--ink-soft); margin-top:8px; max-width:60ch; }
 
-  form.signup{ display:flex; flex-direction:column; gap:12px; }
-  .field-row{ display:flex; gap:10px; flex-wrap:wrap; }
-  input[type="email"]{
-    flex:1 1 220px;
-    padding:14px 16px;
-    border-radius:12px;
-    border:1px solid var(--mist);
-    background:var(--paper);
-    font-family:"IBM Plex Sans", sans-serif;
-    font-size:15px;
-    color:var(--ink);
-  }
-  input[type="email"]:focus{ border-color:var(--pine); }
-  .signup .btn-primary{ flex:0 0 auto; }
-  .form-msg{ font-size:14px; min-height:20px; }
-  .form-msg.ok{ color:var(--pine-dim); }
-  .form-msg.err{ color:var(--pulse); }
+  /* Final CTA */
+  .final-cta{ background:var(--ink); color:var(--bg-mint-2); border-radius:28px; padding:64px 48px; text-align:center; }
+  .final-cta h2{ color:var(--white); font-size:clamp(28px,3.6vw,38px); }
+  .final-cta p{ color:#B9C6BE; margin-top:14px; }
+  .final-cta .cta-row{ justify-content:center; margin-top:28px; }
 
-  @media (max-width: 780px){
-    .waitlist .card{ grid-template-columns:1fr; padding:32px; }
-  }
-
-  /* ---------- Footer ---------- */
-  footer{
-    border-top:1px solid var(--mist-line);
-    padding:32px 0 48px;
-  }
-  footer .wrap{
-    display:flex; justify-content:space-between; align-items:center;
-    flex-wrap:wrap; gap:12px;
-  }
-  footer p{ font-size:13px; color:#7a827b; margin:0; }
+  footer{ padding:40px 0; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  footer p{ font-size:13px; color:var(--muted); margin:0; }
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="wrap">
-    <div class="logo"><span class="dot"></span> Vitara</div>
-    <a class="nav-cta" href="#waitlist">Zugang sichern</a>
+    <div class="logo">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
+      </span>
+      Vitara
+    </div>
+    <div class="nav-links">
+      <a href="#warum">Warum Vitara</a>
+      <a href="#pulse">Der Pulse</a>
+      <a href="#fortschritt">Fortschritt</a>
+      <a href="#mitgliedschaft">Mitgliedschaft</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a class="signin" id="nav-signin" href="#">Anmelden</a>
+      <a class="btn btn-primary" id="nav-cta" href="#">Ersten Pulse starten</a>
+    </div>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="wrap">
-    <p class="eyebrow">Wöchentlicher Gesundheits-Check-in</p>
-    <h1>Ein ruhiger Blick auf <em>deinen</em> Zustand — jede Woche.</h1>
-    <p class="lede">
-      Vitara fasst fünf Dimensionen deiner Gesundheit zu einem Pulse Score zusammen.
-      Keine Diagnosen, kein Alarmismus — nur ein klares Bild und eine Mission bis zum nächsten Check-in.
-    </p>
-    <div class="cta-row">
-      <a class="btn-primary" href="#waitlist">Auf die Warteliste</a>
-      <span class="note">Kostenlos starten · in Entwicklung</span>
+  <div class="wrap grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> WÖCHENTLICHER GESUNDHEITS-CHECK-IN</span>
+      <h1>Ein ruhiger Blick auf deinen <span class="accent">Zustand</span> — jede Woche.</h1>
+      <p class="lede">Vitara fasst fünf Dimensionen deiner Gesundheit zu einem Pulse Score zusammen. Keine Diagnosen, kein Alarmismus — nur ein klares Bild und eine Mission bis zum nächsten Check-in.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary lg" id="hero-cta" href="#">Ersten Pulse starten →</a>
+        <a class="btn btn-ghost lg" href="#pulse">▷ Demo ansehen</a>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><div class="num">5</div><div class="label">Gesundheitsdimensionen</div></div>
+        <div class="stat"><div class="num">10 min</div><div class="label">wöchentlicher Check-in</div></div>
+        <div class="stat"><div class="num">100%</div><div class="label">DSGVO konform</div></div>
+      </div>
     </div>
-  </div>
 
-  <div class="pulse-stage">
-    <div class="wrap">
-      <svg viewBox="0 0 1120 120" preserveAspectRatio="none" role="img" aria-label="Ruhige Pulslinie, die zur Ruhe kommt">
-        <path class="pulse-path" d="M0,60 L140,60 L165,60 L180,20 L200,100 L220,60 L260,60 L900,60 L920,40 L935,80 L950,60 L1120,60" />
-        <circle class="pulse-dot" cx="1120" cy="60" r="4"></circle>
-      </svg>
+    <div class="preview-card">
+      <div class="preview-head">
+        <div>
+          <div class="eyebrow-sm">AKTUELLER PULSE</div>
+          <h3 id="preview-month"></h3>
+        </div>
+        <span class="badge-up">↗ +6</span>
+      </div>
+
+      <div class="gauge-wrap">
+        <svg width="200" height="200" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="86" fill="none" stroke="var(--green-pale)" stroke-width="14" />
+          <circle id="gauge-fill" cx="100" cy="100" r="86" fill="none" stroke="var(--green)" stroke-width="14"
+            stroke-linecap="round" transform="rotate(-90 100 100)"
+            stroke-dasharray="540.4" stroke-dashoffset="540.4" />
+        </svg>
+        <div class="score-label">PULSE SCORE</div>
+        <div class="score-num">84</div>
+        <div class="score-delta">▲ 6 Punkte seit letztem Monat</div>
+      </div>
+
+      <div class="metric-row">
+        <div class="top"><span>Energy</span><span><span class="val">82</span><span class="delta">+4</span></span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:82%"></div></div>
+      </div>
+      <div class="metric-row">
+        <div class="top"><span>Recovery</span><span><span class="val">76</span><span class="delta">+9</span></span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:76%"></div></div>
+      </div>
+      <div class="metric-row">
+        <div class="top"><span>Performance</span><span><span class="val">88</span><span class="delta">+3</span></span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:88%"></div></div>
+      </div>
+      <p style="margin-top:16px; font-size:11.5px; color:var(--muted); text-align:center;">Beispielhafte Darstellung</p>
     </div>
   </div>
 </header>
 
-<section class="intro">
+<section id="warum">
   <div class="wrap">
-    <h2>Nicht mehr Daten. Mehr Verständnis.</h2>
-    <div class="body">
-      <p>
-        Die meisten Gesundheits-Apps sammeln endlos Zahlen und lassen dich damit allein.
-        Vitara dreht das um: einmal pro Woche nimmst du dir fünf Minuten Zeit,
-        beantwortest ein paar Fragen — und bekommst ein ruhiges, verständliches Bild
-        davon, wo du gerade stehst.
-      </p>
-      <p>
-        Jede Erkenntnis ist mit echter Evidenz hinterlegt statt mit Trend-Versprechen.
-        Fortschritt statt Perfektion, Neugier statt schlechtem Gewissen.
-      </p>
+    <div class="section-head">
+      <span class="eyebrow"><span class="dot"></span> WARUM VITARA</span>
+      <h2>Vertrauen ist die Grundlage, nicht ein Feature</h2>
+      <p>Kein Hype, keine Diagnosen — nur ein ruhiger, ehrlicher Blick auf deine Gesundheit.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="mono">→ EVIDENZBASIERT</div>
+        <h3>Keine Trend-Versprechen</h3>
+        <p>Jede Erkenntnis ist mit wissenschaftlicher Evidenz hinterlegt und transparent bewertet — nicht mit Hype.</p>
+      </div>
+      <div class="trust-card">
+        <div class="mono">→ KEINE DIAGNOSEN</div>
+        <h3>Orientierung statt Ersatz</h3>
+        <p>Vitara ersetzt keinen Arztbesuch. Es hilft dir, deinen Körper besser zu verstehen.</p>
+      </div>
+      <div class="trust-card">
+        <div class="mono">→ DATENSOUVERÄNITÄT</div>
+        <h3>Deine Daten gehören dir</h3>
+        <p>Export und Löschung jederzeit möglich. Keine Datenverkäufe, niemals.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="dimensions">
+<section id="pulse">
   <div class="wrap">
-    <div class="head">
+    <div class="section-head">
+      <span class="eyebrow"><span class="dot"></span> DER PULSE</span>
       <h2>Fünf Dimensionen, ein Bild</h2>
-      <p>Dein Pulse Score setzt sich aus fünf gleichwertigen Bereichen zusammen.</p>
+      <p>Einmal pro Woche nimmst du dir fünf Minuten Zeit — dein Pulse Score fasst zusammen, wo du gerade stehst.</p>
     </div>
   </div>
   <div class="wrap" style="padding:0;">
     <div class="dim-grid">
-      <div class="dim">
-        <span class="letter mono">EN</span>
-        <h3>Energy</h3>
-        <p>Wie viel Antrieb dir dein Alltag gerade lässt.</p>
+      <div class="dim"><span class="mono">EN</span><h3>Energy</h3><p>Wie viel Antrieb dir dein Alltag gerade lässt.</p></div>
+      <div class="dim"><span class="mono">RE</span><h3>Recovery</h3><p>Wie gut sich dein Körper zwischen Belastungen erholt.</p></div>
+      <div class="dim"><span class="mono">PE</span><h3>Performance</h3><p>Wie leistungsfähig du dich fühlst.</p></div>
+      <div class="dim"><span class="mono">RS</span><h3>Resilience</h3><p>Wie stabil du mit Stress umgehst.</p></div>
+      <div class="dim"><span class="mono">LO</span><h3>Longevity</h3><p>Wie nachhaltig deine Gewohnheiten wirken.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="fortschritt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><span class="dot"></span> FORTSCHRITT</span>
+      <h2>Deine Entwicklung, nicht nur ein Schnappschuss</h2>
+    </div>
+    <div class="progress-explain">
+      <div>
+        <p style="color:var(--ink-soft); font-size:16px;">Ein einzelner Score sagt wenig. Erst der Verlauf über mehrere Wochen zeigt, ob eine Veränderung wirkt — genau deshalb steht bei jedem Pulse deine Entwicklung im Mittelpunkt, nicht nur die aktuelle Zahl.</p>
       </div>
-      <div class="dim">
-        <span class="letter mono">RE</span>
-        <h3>Recovery</h3>
-        <p>Wie gut sich dein Körper zwischen Belastungen erholt.</p>
-      </div>
-      <div class="dim">
-        <span class="letter mono">PE</span>
-        <h3>Performance</h3>
-        <p>Wie leistungsfähig du dich körperlich und mental fühlst.</p>
-      </div>
-      <div class="dim">
-        <span class="letter mono">RS</span>
-        <h3>Resilience</h3>
-        <p>Wie stabil du mit Stress und Rückschlägen umgehst.</p>
-      </div>
-      <div class="dim">
-        <span class="letter mono">LO</span>
-        <h3>Longevity</h3>
-        <p>Wie nachhaltig deine Gewohnheiten auf lange Sicht wirken.</p>
+      <div class="mini-card">
+        <div class="metric-row" style="margin-top:0;">
+          <div class="top"><span>Woche 1</span><span class="val">71</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:71%"></div></div>
+        </div>
+        <div class="metric-row">
+          <div class="top"><span>Woche 6</span><span class="val">78</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:78%"></div></div>
+        </div>
+        <div class="metric-row">
+          <div class="top"><span>Woche 12</span><span class="val">84</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:84%"></div></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="trust">
+<section id="mitgliedschaft">
   <div class="wrap">
-    <h2>Deine Daten gehören dir. Punkt.</h2>
-    <ul>
-      <li><span class="mark mono">→</span> Keine Diagnosen — Vitara ersetzt keinen Arztbesuch.</li>
-      <li><span class="mark mono">→</span> Evidenzbasiert — jede Erkenntnis ist belegt, nicht bloß plausibel.</li>
-      <li><span class="mark mono">→</span> Datensouveränität — Export und Löschung jederzeit möglich.</li>
-    </ul>
+    <div class="section-head">
+      <span class="eyebrow"><span class="dot"></span> MITGLIEDSCHAFT</span>
+      <h2>Kostenlos starten, wann du willst vertiefen</h2>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <div class="mono" style="color:var(--green); font-size:12.5px;">FREE</div>
+        <div class="price">0 €</div>
+        <ul>
+          <li>Wöchentlicher Pulse &amp; Score</li>
+          <li>Fortschrittsverlauf</li>
+          <li>Grundlegende Insights</li>
+          <li>Streak &amp; Erinnerungen</li>
+        </ul>
+      </div>
+      <div class="plan premium">
+        <div class="mono" style="color:#7FD1A6; font-size:12.5px;">PREMIUM</div>
+        <div class="price">Individuell</div>
+        <ul>
+          <li>Alles aus Free</li>
+          <li>Funktionalmedizinische Perspektive</li>
+          <li>Longevity-Perspektive</li>
+          <li>Biohacking-Perspektive</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="waitlist" id="waitlist">
+<section id="faq">
   <div class="wrap">
-    <div class="card">
-      <div>
-        <h2>Sei beim Start dabei</h2>
-        <p>Trag dich ein und du bekommst als Erstes Zugang, sobald Vitara startet — ganz ohne Spam davor.</p>
-      </div>
-      <div>
-        <form class="signup" id="signup-form">
-          <div class="field-row">
-            <label for="email" style="position:absolute;left:-9999px;">E-Mail-Adresse</label>
-            <input type="email" id="email" name="email" placeholder="deine@email.de" required />
-            <button type="submit" class="btn-primary">Eintragen</button>
-          </div>
-          <p class="form-msg" id="form-msg" role="status"></p>
-        </form>
+    <div class="section-head">
+      <span class="eyebrow"><span class="dot"></span> FAQ</span>
+      <h2>Häufige Fragen</h2>
+    </div>
+    <div class="faq-item">
+      <h3>Ersetzt Vitara einen Arztbesuch?</h3>
+      <p>Nein. Vitara gibt dir Orientierung und Verständnis, stellt aber keine Diagnosen und ersetzt keine medizinische Behandlung.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Wie lange dauert ein Pulse?</h3>
+      <p>Rund 10 Minuten pro Woche — ein kurzer Fragebogen zu den fünf Dimensionen.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Was passiert mit meinen Daten?</h3>
+      <p>Sie gehören dir. Du kannst sie jederzeit exportieren oder löschen lassen, und sie werden niemals verkauft.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Starte deinen ersten Pulse</h2>
+      <p>Kostenlos, in 10 Minuten, ohne Verpflichtung.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary lg" id="final-cta" href="#">Ersten Pulse starten →</a>
       </div>
     </div>
   </div>
@@ -393,42 +388,31 @@
 
 <footer>
   <div class="wrap">
-    <p>© 2026 Vitara — in Entwicklung.</p>
+    <p>© 2026 Vitara.</p>
     <p>Kein Ersatz für medizinische Beratung.</p>
   </div>
 </footer>
 
-<script type="module">
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+<script>
+  // TODO: eure echte App-URL eintragen, sobald der Repo-Name feststeht
+  // (z.B. https://DEIN-GITHUB-NAME.github.io/vitara-app/)
+  const APP_URL = 'https://DEIN-GITHUB-NAME.github.io/vitara-app/';
 
-  // TODO: eure Werte aus Supabase → Project Settings → API eintragen
-  const SUPABASE_URL = 'https://fuqnqvgakxnzzibcrjqa.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_KIJYDKcvP28NO2GV3pzkyg_Wlx6H6e-';
+  document.getElementById('nav-signin').href = APP_URL + '#/login';
+  document.getElementById('nav-cta').href = APP_URL + '#/login';
+  document.getElementById('hero-cta').href = APP_URL + '#/login';
+  document.getElementById('final-cta').href = APP_URL + '#/login';
 
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  document.getElementById('preview-month').textContent =
+    new Date().toLocaleDateString('de-DE', { month: 'long', year: 'numeric' });
 
-  const form = document.getElementById('signup-form');
-  const msg = document.getElementById('form-msg');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email').value.trim();
-    if (!email) return;
-
-    msg.textContent = 'Wird eingetragen …';
-    msg.className = 'form-msg';
-
-    const { error } = await supabase.from('waitlist').insert({ email });
-
-    if (error) {
-      msg.textContent = 'Das hat leider nicht geklappt. Versuch es gleich nochmal.';
-      msg.className = 'form-msg err';
-      return;
-    }
-
-    msg.textContent = 'Danke! Du bist auf der Liste.';
-    msg.className = 'form-msg ok';
-    form.reset();
+  // Gauge auf 84/100 animieren
+  const circumference = 2 * Math.PI * 86;
+  const fill = document.getElementById('gauge-fill');
+  const target = circumference - (84 / 100) * circumference;
+  requestAnimationFrame(() => {
+    fill.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1)';
+    fill.style.strokeDashoffset = target;
   });
 </script>
 
