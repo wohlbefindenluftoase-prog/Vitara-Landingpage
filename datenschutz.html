@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Datenschutzerklärung — Vitara</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EAF6EF; --paper-dim:#FFFFFF; --ink:#13221A;
+    --pine:#3E8F68; --pine-dim:#16281F; --mist-line: rgba(19,34,26,0.10); --error:#B3423A;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:"IBM Plex Sans", sans-serif; line-height:1.6; }
+  .wrap{ max-width:720px; margin:0 auto; padding:48px 24px 80px; }
+  h1{ font-family:"Fraunces", serif; font-weight:500; font-size:30px; margin:0 0 8px; }
+  h2{ font-family:"Fraunces", serif; font-weight:500; font-size:19px; margin:36px 0 10px; }
+  h3{ font-size:15px; font-weight:600; margin:20px 0 6px; }
+  p{ font-size:14.5px; color:#3f4a43; margin:0 0 10px; }
+  a{ color:var(--pine-dim); }
+  .back-link{ display:inline-block; margin-bottom:24px; font-size:13.5px; color:#7a8279; text-decoration:none; }
+  .back-link:hover{ color:var(--ink); }
+
+  .todo-banner{
+    background:rgba(179,66,58,0.08); border:1px solid rgba(179,66,58,0.25);
+    border-radius:14px; padding:18px 20px; margin-bottom:32px;
+  }
+  .todo-banner strong{ display:block; color:var(--error); font-size:14.5px; margin-bottom:6px; }
+  .todo-banner p{ color:var(--error); font-size:13.5px; margin:0; }
+
+  .tech-note{
+    background:var(--paper-dim); border:1px solid var(--mist-line);
+    border-radius:12px; padding:16px 18px; margin:14px 0;
+  }
+  .tech-note strong{ display:block; font-size:13.5px; margin-bottom:6px; color:var(--pine-dim); }
+  .tech-note p{ font-size:13px; margin:0; }
+
+  .field{
+    background:var(--paper-dim); border:1px dashed var(--mist-line);
+    border-radius:8px; padding:2px 8px; color:#9aa39c; font-family:"IBM Plex Mono", monospace;
+    font-size:13px; display:inline-block;
+  }
+  ul{ font-size:14.5px; color:#3f4a43; padding-left:20px; }
+  li{ margin-bottom:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html" class="back-link">← Zurück zur Startseite</a>
+  <h1>Datenschutzerklärung</h1>
+
+  <div class="todo-banner">
+    <strong>⚠ Dies ist eine Struktur-Vorlage, kein rechtsgültiger Text</strong>
+    <p>
+      Die Gliederung unten folgt den Pflichtangaben aus Art. 13/14 DSGVO, so wie sie bei
+      Websites mit Registrierung und personenbezogenen Gesundheits-nahen Daten typischerweise
+      verlangt werden. Kein Absatz ist fertig formuliert — insbesondere die Rechtsgrundlagen,
+      Speicherfristen und die Frage, ob ein Auftragsverarbeitungsvertrag mit Supabase
+      dokumentiert werden muss, erfordern juristische Prüfung. Bei Gesundheitsdaten (Art. 9
+      DSGVO, "besondere Kategorien personenbezogener Daten") gelten zusätzlich verschärfte
+      Anforderungen — das früh mit einer Datenschutz-Fachperson klären, bevor die App live geht.
+    </p>
+  </div>
+
+  <h2>1. Verantwortlicher</h2>
+  <p>
+    <span class="field">[Name / Firmenbezeichnung]</span><br />
+    <span class="field">[Anschrift]</span><br />
+    E-Mail: <span class="field">[E-Mail-Adresse]</span>
+  </p>
+
+  <h2>2. Hosting</h2>
+  <p>Diese Website wird über GitHub Pages gehostet (GitHub, Inc., USA / GitHub B.V.).</p>
+  <div class="tech-note">
+    <strong>Technischer Hinweis</strong>
+    <p>
+      GitHub Pages kann Server-Logs (u. a. IP-Adressen) verarbeiten. Ob und wie lange das
+      geschieht sowie die zugehörige Rechtsgrundlage muss hier ergänzt werden — die aktuellen
+      GitHub-Datenschutzbedingungen dafür heranziehen.
+    </p>
+  </div>
+
+  <h2>3. Google Fonts</h2>
+  <div class="tech-note">
+    <strong>⚠ Bekanntes DSGVO-Risiko bei deutschen Websites</strong>
+    <p>
+      Diese Seite lädt aktuell die Schriftarten Fraunces, IBM Plex Sans und IBM Plex Mono
+      direkt von den Google-Servern (fonts.googleapis.com / fonts.gstatic.com). Dabei wird die
+      IP-Adresse der Besucher:innen an Google in den USA übertragen — deutsche Gerichte (u. a.
+      LG München I) haben das ohne vorherige Einwilligung als DSGVO-Verstoß gewertet.
+      Praktikabelste Lösung: die drei Schriftarten selbst hosten (Dateien herunterladen und
+      über @font-face aus dem eigenen Repo einbinden) statt sie von Google laden zu lassen.
+      Das ist eine rein technische Empfehlung, keine Rechtsberatung — die endgültige Bewertung
+      sollte eine Fachperson treffen.
+    </p>
+  </div>
+
+  <h2>4. Registrierung und Nutzung der App (Supabase)</h2>
+  <p>Bei Registrierung und Nutzung der Vitara-App werden u. a. folgende Daten verarbeitet:</p>
+  <ul>
+    <li>E-Mail-Adresse und Passwort (Authentifizierung)</li>
+    <li>Profildaten (z. B. Vorname, Geburtsdatum, Größe, Gewicht, Aktivitätslevel, Ziele) — <span class="field">[nur falls tatsächlich erhoben]</span></li>
+    <li>Pulse-Antworten und berechnete Scores (Energy, Recovery, Performance, Resilience, Longevity)</li>
+    <li>Abo-/Mitgliedschaftsstatus (Free/Premium)</li>
+  </ul>
+  <p>
+    Verarbeitet über: Supabase (<span class="field">[Supabase Inc. / Hosting-Region einfügen]</span>).
+    Rechtsgrundlage: <span class="field">[i. d. R. Art. 6 Abs. 1 lit. b DSGVO für Vertragserfüllung —
+    bei Gesundheitsdaten zusätzlich Art. 9 DSGVO prüfen, i. d. R. ausdrückliche Einwilligung
+    nach Art. 9 Abs. 2 lit. a erforderlich]</span>.
+  </p>
+  <div class="tech-note">
+    <strong>Technischer Hinweis</strong>
+    <p>
+      Für die Nutzung von Supabase als Auftragsverarbeiter ist in der Regel ein
+      Auftragsverarbeitungsvertrag (AVV / DPA) nötig — bei Supabase über deren
+      Data Processing Agreement abschließbar. Bitte prüfen und hier referenzieren.
+    </p>
+  </div>
+
+  <h2>5. Speicherdauer</h2>
+  <p><span class="field">[Platzhalter — z. B. "Daten werden gespeichert, solange das Konto besteht, und binnen X Tagen nach Löschung entfernt"]</span></p>
+
+  <h2>6. Cookies und lokaler Speicher</h2>
+  <p>
+    <span class="field">[Platzhalter — prüfen, ob/welche Cookies gesetzt werden; Supabase Auth nutzt
+    typischerweise localStorage für die Sitzung, was gesondert zu dokumentieren ist]</span>
+  </p>
+
+  <h2>7. Deine Rechte</h2>
+  <ul>
+    <li>Auskunft über die zu deiner Person gespeicherten Daten (Art. 15 DSGVO)</li>
+    <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
+    <li>Löschung deiner Daten (Art. 17 DSGVO) — in der App direkt über "Profil löschen" möglich</li>
+    <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+    <li>Datenübertragbarkeit (Art. 20 DSGVO) — in der App direkt über "Daten exportieren" möglich</li>
+    <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
+    <li>Beschwerde bei einer Datenschutz-Aufsichtsbehörde</li>
+  </ul>
+  <p>Zuständige Aufsichtsbehörde: <span class="field">[Landesdatenschutzbehörde je nach Sitz einfügen]</span></p>
+
+  <h2>8. Kontakt für Datenschutzanfragen</h2>
+  <p>E-Mail: <span class="field">[E-Mail-Adresse für Datenschutzanfragen]</span></p>
+
+  <p style="margin-top:40px; font-size:12.5px; color:#9aa39c;">
+    Letzte Aktualisierung dieser Vorlage: <span class="field">[Datum einfügen, sobald final ausgefüllt]</span>
+  </p>
+</div>
+</body>
+</html>
